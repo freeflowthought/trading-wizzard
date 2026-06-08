@@ -1,0 +1,54 @@
+watchlist:
+  - ticker: SPY
+    name: SPDR S&P 500 ETF Trust
+    aliases: ["$SPY", "SPY", "S&P 500", "SPDR S&P 500"]
+    reddit_terms: ["SPY", "$SPY", "S&P 500"]
+  - ticker: QQQ
+    name: Invesco QQQ Trust
+    aliases: ["$QQQ", "QQQ", "Nasdaq 100", "NASDAQ 100"]
+    reddit_terms: ["QQQ", "$QQQ", "Nasdaq"]
+  - ticker: SMH
+    name: VanEck Semiconductor ETF
+    aliases: ["$SMH", "SMH", "semiconductor ETF", "semis"]
+    reddit_terms: ["SMH", "$SMH", "semiconductors"]
+  - ticker: SOXX
+    name: iShares Semiconductor ETF
+    aliases: ["$SOXX", "SOXX", "iShares Semiconductor"]
+    reddit_terms: ["SOXX", "$SOXX", "semiconductors"]
+  - ticker: NVDA
+    name: NVIDIA
+    aliases: ["$NVDA", "NVDA", "NVIDIA", "Nvidia"]
+    reddit_terms: ["NVDA", "$NVDA", "Nvidia"]
+  - ticker: AMD
+    name: Advanced Micro Devices
+    aliases: ["$AMD", "AMD", "Advanced Micro Devices"]
+    reddit_terms: ["AMD", "$AMD"]
+  - ticker: AVGO
+    name: Broadcom
+    aliases: ["$AVGO", "AVGO", "Broadcom"]
+    reddit_terms: ["AVGO", "$AVGO", "Broadcom"]
+  - ticker: TSM
+    name: Taiwan Semiconductor Manufacturing
+    aliases: ["$TSM", "TSM", "TSMC", "Taiwan Semiconductor"]
+    reddit_terms: ["TSM", "$TSM", "TSMC"]
+  - ticker: MSFT
+    name: Microsoft
+    aliases: ["$MSFT", "MSFT", "Microsoft"]
+    reddit_terms: ["MSFT", "$MSFT", "Microsoft"]
+  - ticker: AAPL
+    name: Apple
+    aliases: ["$AAPL", "AAPL", "Apple"]
+    reddit_terms: ["AAPL", "$AAPL", "Apple"]
+
+subreddits:
+  - stocks
+  - investing
+  - wallstreetbets
+  - options
+  - SecurityAnalysis
+
+ignore_terms:
+  - AI
+  - GDP
+  - CPI
+  - Fed

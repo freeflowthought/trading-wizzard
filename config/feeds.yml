@@ -1,0 +1,34 @@
+rss_feeds:
+  - name: Fed press releases
+    source_type: fed_rss
+    url: https://www.federalreserve.gov/feeds/press_all.xml
+  - name: Fed speeches
+    source_type: fed_rss
+    url: https://www.federalreserve.gov/feeds/speeches.xml
+  - name: SEC latest filings
+    source_type: sec_rss
+    url: https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&CIK=&type=S-1&company=&dateb=&owner=include&start=0&count=40&output=atom
+
+fred_series:
+  - id: DFF
+    name: Effective Federal Funds Rate
+  - id: DGS10
+    name: 10-Year Treasury Constant Maturity
+  - id: CPIAUCSL
+    name: Consumer Price Index
+  - id: UNRATE
+    name: Unemployment Rate
+  - id: BAMLH0A0HYM2
+    name: ICE BofA High Yield OAS
+
+news_keywords:
+  - FOMC
+  - Federal Reserve
+  - Treasury
+  - CPI
+  - PCE
+  - jobs report
+  - capex
+  - semiconductor
+  - IPO
+  - S-1
