@@ -1,0 +1,62 @@
+# Bounded expansion requested by the user, within the two-hour window ending22:48:54UTC.
+protocol_version: broad-sectors-events-staged-TQQQ-1
+primary_objective: net_profit_over_QQQ_holding_with_return_priority
+universe: [QQQ, SPY, SMH, XLU, XLV, XLP, XLE, XLF, ITA, TLT, GLD, TQQQ]
+one_shared_account: true
+maximum_ETF_position_value_fraction: 1.0
+actual_TQQQ_history_required: true
+internal_ETF_leverage_reported_separately: true
+maximum_profiles: 12
+price_measurements: [raw_split_adjusted_execution, provider_total_return_synthetic_OHLC]
+primary_ranking_measurement: provider_total_return_synthetic_OHLC
+primary_measurement_is_reinvestment_proxy_not_nominal_fill_tape: true
+training:
+  start: '2017-01-12'
+  end: '2021-12-21'
+validation_blocks:
+  - ['2022-01-03', '2023-07-27']
+  - ['2023-08-07', '2025-02-03']
+  - ['2025-02-10', '2026-04-16']
+pretest_numeric_cutoff: '2026-04-24'
+recent_window: ['2026-04-27', '2026-10-27']
+recent_is_adaptive_research_not_untouched_holdout: true
+selected_long_continuous_replay: ['2017-01-12', '2026-10-27']
+execution:
+  signal: completed_US_session_close
+  fill: following_actual_session_open
+  fee_bps_per_side: 1
+  slippage_bps_per_side: 2
+  cost_multipliers: [1, 2]
+selection:
+  positive_train_excess_over_QQQ_total_return: true
+  positive_validation_excess_over_QQQ_total_return: true
+  positive_validation_blocks_at_least: 2
+  pretest_drawdown_ratio_limit: 1.5
+  drawdown_ratio_sensitivity: [1.25, 1.5, 1.75]
+  ratios_are_research_settings_not_user_personal_limits: true
+  ranking: validation_excess_then_lower_drawdown_then_fewer_changes
+  no_eligible_profile: report_failure_keep_predeclared_default_diagnostic
+  matched_selected_ablations_not_ranked: [no_events, no_capex, no_TQQQ]
+attribution:
+  same_universe_no_event_and_no_capex_ablation: true
+  weekly_unleveraged_sector_control: true
+  full_TQQQ_and_static_QQQ_TQQQ_leverage_references: true
+  no_active_edge_claim_from_sector_or_leverage_beta_alone: true
+  total_return_synthetic_OHLC_sensitivity_separate_from_raw_execution: true
+event_scope:
+  observed_news_policy_and_prediction_markets_separate: true
+  event_thresholds: [0.5, 0.65]
+  threshold_applies_to_impact_score_not_equity_probability: true
+  score_max_in_current_sources: 0.5
+  weaker_new_quotes_cannot_hide_other_active_event_families: true
+  same_episode_daily_quotes_not_independent_shocks: true
+  no_pre_Polymarket_or_option_history_fabricated: true
+capex_scope:
+  cash_PPE_and_total_issuer_revenue_not_cloud_segments: true
+  acceleration: same_fiscal_YTD_YoY_change_vs_preceding_year
+  available_filing_versions_only: true
+  both_current_fact_components_max_age_calendar_days: 130
+  minimum_fresh_issuers: 2
+  semiconductor_caution: negative_cash_capex_growth_or_joint_growth_deceleration
+  missing_data_neutral: true
+promotion: never_automatic_from_research_return

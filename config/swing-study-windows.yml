@@ -1,0 +1,38 @@
+# Predeclared price-execution study. Its baseline is a transparent rules proxy,
+# not authenticated author fills or a reconstruction of the claimed 72% score.
+schema_version: weekly-price-swing-study-1
+assets: [QQQ, SPY]
+tiers: [support]
+watch_sessions: 20
+maximum_holding_sessions: 40
+minimum_history_sessions: 260
+selection_at: '2026-04-27T00:00:00Z'
+blocks:
+  - block_id: train-2017-2021
+    partition: train
+    first_origin: '2017-01-03'
+    last_origin: '2021-09-24'
+  - block_id: validation-2022-2023
+    partition: validation
+    first_origin: '2022-01-03'
+    last_origin: '2023-04-28'
+  - block_id: validation-2023-2024
+    partition: validation
+    first_origin: '2023-08-07'
+    last_origin: '2024-11-01'
+  - block_id: validation-2025-2026
+    partition: validation
+    first_origin: '2025-02-10'
+    last_origin: '2026-01-16'
+  - block_id: adaptive-test-2026-halfyear
+    partition: test
+    first_origin: '2026-04-27'
+    last_origin: '2026-10-27'
+    nav_end: '2026-10-27'
+    allow_pending_book_positions: true
+    new_generation_is_untouched_holdout: false
+baseline:
+  definition: default_structure_and_default_execution_parameters_price_only
+  actual_author_comparison_proven: false
+missing_historical_event_model: unavailable_no_default_probability
+price_return_only_is_full_goal_completion: false

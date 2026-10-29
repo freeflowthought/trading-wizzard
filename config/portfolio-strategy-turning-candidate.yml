@@ -1,0 +1,32 @@
+# Activated 2026-10-29: these blocks are now in portfolio-strategy.yml (the file read
+# by the daily report). Kept as the reviewed reference copy.
+# Evidence: data/processed/evaluation/swing-experiments/turning-10y-20261029T013548Z/summary.json
+schema_version: news-cycle-market-implied-turning-candidate-1
+base_strategy: portfolio-strategy.yml
+turning_parameters:
+  # Stress top: any reason below, confirmed by QQQ closing under its 20-day average,
+  # trims to 70% QQQ and removes TQQQ.
+  stress_ratio: 1.0            # VIX/VIX3M term-structure inversion
+  stress_credit_dd: 1.0        # HYG/IEF drawdown trigger disabled (train-window Calmar)
+  fed_shock_pp: 0.35           # 2Y yield +35bp in 20 sessions; PM Fed odds supersede
+  claims_rise: 0.2             # initial-claims 4w avg 20% above its 52w low
+  claims_trend_filter: true    # ...and above its 26-week average (fixes 2021 false alarms)
+  stress_confirm_sma: 20
+  stress_retained: 0.7
+  # Capitulation bottom: inversion peak >= 1.05 within 15 sessions, then <= 0.97,
+  # plus drawdown threshold, higher low, rising close above prior 3-day high.
+  capitulation_ratio: 1.05
+  capitulation_lookback: 15
+  normalized_ratio: 0.97
+  capitulation_weight: 0.75
+  capitulation_grace_sessions: 5  # re-inversion can't trim a fresh entry above its anchor low
+  # Calm-uptrend TQQQ sleeve: rejected out of sample, kept disabled.
+  calm_ratio: 0.88
+  calm_exit_ratio: 0.95
+  calm_tqqq: 0.0
+  calm_vol_target: 0.0
+  leverage_gate: true          # price-only TQQQ bottoms need >200d SMA or a washout
+  use_prediction_markets: true # Polymarket Fed odds replace the 2Y proxy when quoted
+# off | context | trigger. "context" stores corroborated headline events in
+# observed-event-history.json for the report without letting them trade.
+news_classifier: context

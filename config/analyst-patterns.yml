@@ -1,0 +1,117 @@
+# Source study only. Historical prices are evidence, never live policy inputs.
+# Indicators and position percentages not specified by an author remain system choices.
+comparisons:
+  - id: expectation-versus-reaction
+    name: 事件先看预期差，再看实际反应
+    available_from: '2026-08-25'
+    common: 好消息不等于上涨；事件落地后，价格与指引是否超出已计价预期更重要。
+    eagle: 财报前关注预期过满，财报后检查利好能否推动价格；避免盲目追入。
+    shunge: 区分财报波幅与方向，等待事件落地再决定是否继续交易。
+    difference: 鹰哥更强调利率、估值和行业成本；顺哥更常把事件放进已有支撑与分批剧本。
+    failure_conditions: 预期基准或发布后行情不可核验时，不把主观点评写成已验证交易信号。
+    evidence:
+      - {author: Eagle, date: '2026-05-20', time: '9:02 AM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 57, kind: conditional_view, summary: '业绩必须超出已经很高的预期，否则优秀也可能被当作利空。'}
+      - {author: Eagle, date: '2026-06-04', time: '9:02 AM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 106, kind: reported_reaction, summary: '作者称AVGO超预期但价格大跌；不是独立核验的行情证据。'}
+      - {author: Shunge, date: '2026-08-25', time: '11:58 PM', source: data/raw/timelines/august-september-2026-excerpts.txt, line: 7, kind: conditional_view, summary: '财报前等待；波幅估计不是方向胜率。'}
+  - id: price-time-confirmation
+    name: 收复、持续与回踩，比碰到数字更重要
+    available_from: '2026-10-21'
+    common: 把反弹和反转分开；价格条件与观察时间共同决定是否恢复行动。
+    eagle: 曾以站回20天均线并维持三天作为恢复条件，否则继续减持。
+    shunge: 关键压力收复与支撑跨过事件窗口，是不同的修复路径。
+    difference: 鹰哥给出均线与持续时间；顺哥更多使用具体结构区与事件日期。
+    failure_conditions: 作者没有统一说明SMA或EMA、盘中或收盘口径；本系统的完成日线确认是透明代理，不冒充原算法。
+    evidence:
+      - {author: Eagle, date: '2026-06-08', time: '9:30 AM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 117, kind: conditional_method, summary: '20天均线站上并挺住三天，否则按原计划继续减持科技股。'}
+      - {author: Shunge, date: '2026-10-21', time: '9:02 PM', source: data/raw/timelines/october-2026.txt, line: 89, kind: conditional_view, summary: '收复压力与横盘跨过期权窗口，是两条条件不同的修复路径。'}
+  - id: levels-from-structure
+    name: 价位来自当期结构，不能永久保存历史点数
+    available_from: '2026-08-30'
+    common: 前高前低、均线、缺口和区域是观察依据；条件变化后必须重新计算和评估。
+    eagle: 文本明确出现20日均线、费半60日均线、前周低点和三角形下轨。
+    shunge: 使用支撑与压力区间分支；跌破边界后切换更深压力情景。
+    difference: 鹰哥更常说清均线或形态名称；顺哥部分数字只有系统判断，不能倒推成确定公式。
+    failure_conditions: 缺少形态锚点或指标定义时不能伪造复刻；历史点位只留在案例，今日区域由当前数据推导。
+    evidence:
+      - {author: Eagle, date: '2026-07-08', time: '9:15 AM', source: data/raw/timelines/eagle-june-july-2026.txt, line: 115, kind: level_method, summary: '明确把一个观察位称为20天均线。'}
+      - {author: Eagle, date: '2026-07-09', time: '9:21 AM', source: data/raw/timelines/eagle-june-july-2026.txt, line: 119, kind: level_method, summary: '费半触碰60日均线后的支撑；不能搬成所有ETF的同一价位。'}
+      - {author: Shunge, date: '2026-08-30', time: '9:19 PM', source: data/raw/timelines/august-september-2026-excerpts.txt, line: 29, kind: conditional_view, summary: '分开表达支撑区、压力区与破位后的风险。'}
+  - id: macro-transmission
+    name: 事件要经过利率、油价和信用传导
+    available_from: '2026-09-02'
+    common: 新闻先形成假设，再用收益率与资产价格响应检查，而不是直接当成股指概率。
+    eagle: 强调20/30年长端利率、美元与油价对估值、融资成本和行业利润的影响。
+    shunge: 更突出10年债收益率与风险偏好，并保留政策和政治事件的情景分支。
+    difference: 债券期限、事件期限和行业成本渠道不同，不能用同一数字替代所有传导变量。
+    failure_conditions: 事件发生不等于利率或油价必按预期走；传导反向时撤回原风险预算，不合成股指上涨百分比。
+    evidence:
+      - {author: Eagle, date: '2026-05-20', time: '9:02 AM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 57, kind: conditional_method, summary: '财报后还要看20年美债收益率是否继续上升。'}
+      - {author: Eagle, date: '2026-07-09', time: '9:21 AM', source: data/raw/timelines/eagle-june-july-2026.txt, line: 119, kind: causal_hypothesis, summary: '高油价与高利率不利高成本航空和高负债公司。'}
+      - {author: Shunge, date: '2026-09-02', time: '9:26 AM', source: data/raw/timelines/august-september-2026-excerpts.txt, line: 40, kind: causal_hypothesis, summary: '把10年美债方向作为风险偏好的观察开关；原文不是已验证因果模型。'}
+  - id: rotation-cash-flow
+    name: 轮动需要广度、成本与现金流共同支持
+    available_from: '2026-08-27'
+    common: 龙头涨不等于所有成分健康；融资、资本开支和盈利兑现会改变板块选择。
+    eagle: 从拥挤科技转向受益成本下降、低估值或稳定现金流的传统板块。
+    shunge: 关注半导体领导股与大客户融资链；反弹后仍可能有资金约束。
+    difference: 鹰哥的防守轮动更广，顺哥样本更集中于半导体与期权交易。
+    failure_conditions: 相对价格表现不冒充实际资金流；未来现金流恶化假设不填成当前报表亏损事实。
+    evidence:
+      - {author: Eagle, date: '2026-06-02', time: '9:26 AM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 95, kind: future_scenario, summary: '若资本开支和融资趋势延续，未来自由现金流可能转负；不是当前财务事实。'}
+      - {author: Eagle, date: '2026-06-18', time: '9:21 AM', source: data/raw/timelines/eagle-june-july-2026.txt, line: 53, kind: causal_hypothesis, summary: '停战和成本下降情景下观察航空、零售消费。'}
+      - {author: Shunge, date: '2026-08-27', time: '11:19 AM', source: data/raw/timelines/august-september-2026-excerpts.txt, line: 18, kind: causal_hypothesis, summary: '龙头上涨同时生态链融资承压，提示广度与现金流风险。'}
+  - id: revisions-not-perfect-system
+    name: 新证据可以改口，自述盈利不是回测
+    available_from: '2026-10-19'
+    common: 把计划、已发生的价格反应和事后复盘分开；修订要有时间和理由。
+    eagle: 早盘布局空头，盘中停火消息出现后暂停；也承认过未等发布会便提前交易。
+    shunge: 根据期权接股需求和事件消息调整反弹仓与现金安排。
+    difference: 两人都含明确条件和临场裁量，不能压成无例外机械交易系统。
+    failure_conditions: 没有完整成交、期限、条件及独立行情时不计算命中率；日内改口不抹掉旧判断。
+    evidence:
+      - {author: Eagle, date: '2026-05-21', time: '1:55 PM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 61, kind: dated_revision, summary: '停火消息后暂停原来的做空安排。'}
+      - {author: Eagle, date: '2026-06-17', time: '10:56 AM', source: data/raw/timelines/eagle-june-july-2026.txt, line: 47, kind: self_reported_trade, summary: '承认本想等待发布会，却提前开仓；不是完美遵守规则的证据。'}
+      - {author: Shunge, date: '2026-10-19', time: null, source: data/raw/timelines/october-2026.txt, line: 21, kind: stated_position_plan, summary: '反弹仓与卖出看跌期权潜在接股资金需要统筹。'}
+  - id: staged-exits-and-budget
+    name: 分阶段兑现，作者做法与用户预算分开
+    available_from: '2026-07-13'
+    common: 反弹或事件前降低暴露；短线交易仓与长线核心仓不能混成一个卖出比例。
+    eagle: DOW和LYB到20MV时自述先止盈一半，但没有定义20MV。
+    shunge: 根据反弹、期权和解禁安排分阶段兑现，不代表固定账户权重。
+    difference: 现用10%总账户上限及4/3.5/2.5分批、40/30/30兑现是用户/系统政策，不是从作者文本训练出的比例。
+    failure_conditions: 分母要明确是本轮原始交易仓，不能套到全部核心仓；未见成交记录不声称已经执行。
+    evidence:
+      - {author: Eagle, date: '2026-07-13', time: '2:53 PM', source: data/raw/timelines/eagle-june-july-2026.txt, line: 133, kind: self_reported_exit, summary: 'DOW/LYB到20MV先止盈一半；指标含义未明确。'}
+      - {author: Shunge, date: '2026-06-15', time: '11:38 AM', source: data/raw/timelines/june-2026.txt, line: 1, kind: self_reported_exit, summary: '反弹兑现部分股票，并为期权安排保留资金。'}
+  - id: unresolved-indicator-variants
+    name: 技术共振保留为可检验候选
+    available_from: '2026-08-25'
+    common: 技术标签和波幅判断可以提示观察窗口，但不自动提供方向胜率。
+    eagle: 曾称日线与周线高9共振，未提供算法；不能认定等同于公开DeMark版本。
+    shunge: 曾给财报波幅范围，却未提供其模型、样本或校准过程。
+    difference: 可以列出公开定义作为候选，再明确哪些是系统代理；不能把视频标题当作完整方法。
+    failure_conditions: 没有参数、图像或可访问字幕时保留未解项；不凭九转、SMC或波幅标签生成保证底部。
+    evidence:
+      - {author: Eagle, date: '2026-06-03', time: '9:18 AM', source: data/raw/timelines/eagle-may-june-2026.txt, line: 97, kind: indicator_claim, summary: '日线及周线神奇九转高9；具体版本未知。'}
+      - {author: Shunge, date: '2026-08-25', time: '11:58 PM', source: data/raw/timelines/august-september-2026-excerpts.txt, line: 7, kind: model_claim, summary: '给出财报波幅，但文本不足以还原完整模型。'}
+resources:
+  - name: DeMark公开候选定义
+    url: https://demark.com/sequential-indicator/
+    access_level: primary_documentation
+    finding: 官方资料区分9 Setup和13 Countdown；不能据此证明鹰哥使用相同版本或必然见底。
+  - name: 鹰哥SMC视频说明
+    url: https://www.youtube.com/watch?v=caTouoQys7o
+    access_level: description_only
+    finding: 已核验标题/说明涉及波音案例、前高低流动性、突破回踩与迅速回区间、BOS/CHOCH/OB及风险；未取得字幕，不声称看过正文或复刻作者算法。
+  - name: 鹰哥期权指标视频元数据
+    url: https://www.youtube.com/watch?v=v1xooU-kms4
+    access_level: description_only
+    finding: 只确认视频介绍期权指标分析；没有可访问字幕，不能据此确定具体指标或公式。
+  - name: 鹰哥美债与AI板块视频元数据
+    url: https://www.youtube.com/watch?v=8yG_PXsL50w
+    access_level: description_only
+    finding: 只确认标题/说明的主题；未获得视频正文，不能补造20MV定义。
+notes:
+  - 20MV定义未解；20日SMA是系统可复核代理，不冒充作者原指标。
+  - 作者的宏观事实、资金流及交易盈利陈述均需独立验证；事件概率不等于股指上涨概率。
+  - 结构区、ATR缓冲和确认参数是透明工程选择，未按作者预测结果拟合或优化。

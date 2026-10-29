@@ -4,6 +4,7 @@ from statistics import mean, pstdev
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
 from .models import TechnicalSnapshot
+from .playbook import round_levels
 from .storage import write_json
 
 IMMEDIATE_LEVEL_DISTANCE_PCT = 0.02
@@ -57,14 +58,19 @@ def rsi(values: List[float], window: int = 14) -> List[Optional[float]]:
         losses.append(abs(min(change, 0.0)))
     avg_gain = mean(gains)
     avg_loss = mean(losses)
-    output[window] = 100.0 if avg_loss == 0 else 100.0 - 100.0 / (1.0 + avg_gain / avg_loss)
+    def rsi_value() -> float:
+        if avg_gain == avg_loss == 0:
+            return 50.0
+        return 100.0 if avg_loss == 0 else 100.0 - 100.0 / (1.0 + avg_gain / avg_loss)
+
+    output[window] = rsi_value()
     for index in range(window + 1, len(values)):
         change = values[index] - values[index - 1]
         gain = max(change, 0.0)
         loss = abs(min(change, 0.0))
         avg_gain = (avg_gain * (window - 1) + gain) / window
         avg_loss = (avg_loss * (window - 1) + loss) / window
-        output[index] = 100.0 if avg_loss == 0 else 100.0 - 100.0 / (1.0 + avg_gain / avg_loss)
+        output[index] = rsi_value()
     return output
 
 
@@ -88,6 +94,7 @@ def latest_indicators(rows: List[Dict[str, Any]]) -> Dict[str, Optional[float]]:
         return {}
     sma20 = rolling_mean(close_values, 20)
     sma50 = rolling_mean(close_values, 50)
+    sma200 = rolling_mean(close_values, 200)
     rsi14 = rsi(close_values, 14)
     macd_line, signal_line = macd(close_values)
     returns = [
@@ -100,6 +107,7 @@ def latest_indicators(rows: List[Dict[str, Any]]) -> Dict[str, Optional[float]]:
         "close": close_values[-1],
         "sma20": sma20[-1],
         "sma50": sma50[-1],
+        "sma200": sma200[-1],
         "rsi14": rsi14[-1],
         "macd": macd_line[-1],
         "macd_signal": signal_line[-1],
@@ -278,6 +286,9 @@ def cluster_support_resistance(
     candidates = _pivot_points(recent_rows, bars_for_peak=bars_for_peak)
     candidates.extend(_recent_range_levels(rows))
     candidates.extend(_recent_price_action_levels(rows, current))
+    # Shunge's targets/supports are pivots that coincide with round numbers;
+    # adding the round numbers lets confluence raise a level's touch count.
+    candidates.extend(round_levels(current))
     return _cluster_price_levels(candidates, current, merge_percent, max_levels)
 
 

@@ -1,0 +1,72 @@
+schema_version: news-cycle-market-implied-turning-2
+enabled: true
+start: '2017-01-12'
+parameters:
+  confirm_sessions: 2
+  core_weight: 0.5
+  drawdown_threshold: 0.08
+  event_threshold: 0.5
+  event_ttl_sessions: 5
+  leader_count: 2
+  momentum_sessions: 126
+  recovery_max_sessions: 10
+  recovery_take_profit: 0.1
+  recovery_weight: 0.5
+  support_sessions: 20
+  top_breakout_sessions: 5
+  top_profit_atr: 3
+  trend_sessions: 200
+  use_capex: false
+  use_events: true
+cycle_parameters:
+  bottom_min_age: 10
+  bottom_trend_sessions: 50
+  max_holding_sessions: 40
+  migrate_gain: 0.2
+  top_retained: 0.7
+turning_parameters:
+  stress_ratio: 1.0
+  stress_credit_dd: 1.0
+  fed_shock_pp: 0.35
+  claims_rise: 0.2
+  claims_trend_filter: true
+  stress_confirm_sma: 20
+  stress_retained: 0.7
+  capitulation_ratio: 1.05
+  capitulation_lookback: 15
+  normalized_ratio: 0.97
+  capitulation_weight: 0.75
+  capitulation_grace_sessions: 5
+  calm_ratio: 0.88
+  calm_exit_ratio: 0.95
+  calm_tqqq: 0.0
+  calm_vol_target: 0.0
+  leverage_gate: true
+  use_prediction_markets: true
+news_classifier: context
+reference_source:
+  pretest: /Users/devacct/coding/trading-wizzard/data/processed/evaluation/swing-experiments/cycle-event-pretest-20261028T214834030771Z
+  confirmation: /Users/devacct/coding/trading-wizzard/data/processed/evaluation/swing-experiments/event-cycle-confirmation-cost1-20261028T215326072977Z
+  turning_evaluation: /Users/devacct/coding/trading-wizzard/data/processed/evaluation/swing-experiments/turning-10y-20261029T013548Z
+  turning_v1_evaluation: /Users/devacct/coding/trading-wizzard/data/processed/evaluation/swing-experiments/turning-10y-20261029T011024Z
+  turning_review: /Users/devacct/coding/trading-wizzard/docs/2026-10-29-turning-layer-review.md
+  variant: news-no-market+market-implied-turning
+  selection: user_accepted_turning_layer_2026-10-29_plus_claims_trend_and_capitulation_grace
+  ten_year_price_cagr_pct: 26.75
+  ten_year_max_drawdown_pct: 25.283041480572045
+  ten_year_baseline_price_cagr_pct: 23.71
+  ten_year_baseline_max_drawdown_pct: 31.67
+  recent_is_untouched_holdout: false
+  recent_price_return_pct: 13.113439468514855
+  recent_total_return_proxy_pct: 13.258404661038682
+  recent_max_drawdown_pct: 23.641019811501398
+  QQQ_recent_total_return_reference_pct: 9.91287336675073
+  QQQ_recent_max_drawdown_pct: 11.217806970811358
+prediction_market_role: fed_odds_supersede_2y_proxy_in_turning_stress_when_quoted
+portfolio_history: portfolio-history.json
+observed_event_history: observed-event-history.json
+automatic_orders: false
+activated_at: '2026-10-29T01:36:14+00:00'
+previously_activated_at:
+- '2026-10-29T01:15:35+00:00'
+- '2026-10-28T22:14:48.787279+00:00'

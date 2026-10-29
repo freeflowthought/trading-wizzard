@@ -1,0 +1,47 @@
+# Latest user acceptance: improve realized trading profit over the old model.
+# This is a new study; earlier protocols and their failed gates are preserved.
+protocol_version: price-action-profit-1
+acceptance_source: user_2026_10_28_profit_over_previous_model_author_beating_optional
+primary_objective: net_account_profit_after_costs
+author_outperformance_required: false
+exact_top_bottom_point_accuracy_required: false
+price_action:
+  priority: candles_then_support_resistance
+  bottom: multi_session_confirmation_before_staged_entry
+  top: earlier_partial_profit_then_raise_protection_accept_missed_upside
+  event_information: auxiliary_only_no_missing_event_veto
+  unvalidated_event_weights: zero
+comparison:
+  control: baseline-20261028T162241334896Z-d1ce44b6
+  assets: [QQQ, SPY]
+  max_new_capital_pct: 10.0
+  max_campaign_modeled_loss_pct: 0.5
+  max_concurrent_campaigns: 1
+  fee_bps_per_side: 1.0
+  slippage_bps_per_side: 2.0
+  decision_and_fill: completed_session_close_then_next_actual_session_open
+  pending_positions: mark_to_market_include_in_account_nav
+  return_basis: price_return_excluding_unverified_dividend_cash
+selection:
+  inputs_and_candidate_list_frozen_before_results: true
+  select_on: train_and_three_chronological_pretest_validation_blocks
+  recent_halfyear: adaptive_confirmation_not_untouched_holdout
+  minimum_baseline_trade_count_required: false
+  winner_must_not_depend_on_one_validation_block: true
+  ranking: validation_net_profit_then_lower_drawdown_then_fewer_changes
+  no_positive_stable_candidate: keep_existing_production_model
+  candidate_budget: 16
+evaluation:
+  - net_account_return_and_absolute_percentage_point_gain
+  - max_drawdown_and_gap_losses
+  - realized_and_unrealized_pnl_separately
+  - trade_count_and_capital_exposure
+  - retained_profit_and_profit_giveback
+  - doubled_transaction_cost_sensitivity
+  - matched_entry_only_and_exit_only_ablation
+stopping:
+  definition: material_profit_improvement_with_credible_risk_and_cost_checks
+  user_did_not_specify_numeric_materiality_threshold: true
+  no_relative_improvement_claim_on_tiny_control_without_absolute_gain: true
+  no_guaranteed_future_profit_claim: true
+  stop_adding_factors_after_successful_verification: true

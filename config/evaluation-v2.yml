@@ -1,0 +1,50 @@
+# New research design after v1 failure was observed. Not an untouched half-year holdout.
+protocol_version: halfyear-direction-v2
+evaluation_start: '2026-04-27'
+evaluation_end: '2026-10-27'
+primary_horizon_sessions: 5
+secondary_horizons_sessions: [1, 20]
+primary_tickers: [QQQ, SPY]
+individual_tickers: [NVDA, AMD, AVGO, TSM, UMC, MSFT, AAPL, TSLA, ORCL, CRM, NOW, ADBE, SNOW, TTMI, COHR, PFE, MU, SNDK, QCOM, CEG, VST, RCL, HOOD, PLTR, INTC]
+training:
+  window_sessions: 1260
+  refit_every_sessions: 5
+  embargo_sessions: 5
+  pretest_validation_sessions: 126
+  candidate_windows_sessions: [252, 504, 1260]
+  mean_loss_penalties: [0.001, 0.01]
+  stock_direction_thresholds: [0.5]
+  calibration_window_sessions: 126
+  calibration_variants: [raw, rolling_oof_platt]
+  prior_window_sessions: 1260
+selection:
+  folds: three_contiguous_42_session_blocks
+  calibration_gate: aggregate_brier_improves_and_logloss_not_worse_and_brier_better_in_two_of_three_blocks
+  model_gate: aggregate_brier_and_logloss_beat_prior_and_brier_better_in_two_of_three_blocks
+  ranking: minimum_brier_then_logloss_then_stable_config_order
+  fallback: prior_only_if_no_candidate_passes
+  missing_forecast_brier: 1.0
+  logloss_epsilon: 0.000000000001
+  missing_forecast_logloss: minus_log_epsilon
+  warmup_oof: same_candidate_weekly_fits_before_each_origin
+  calibration_labels: mature_with_full_session_embargo_before_each_fit
+  selection_cutoff: strictly_before_evaluation_start
+scoring:
+  cohort: all_scheduled_mature_origins_not_only_trade_signals
+  missing_prediction: miss
+  baselines: [frozen_shunge_rule_proxy, always_up]
+  paired_date_blocks_sessions: 5
+  bootstrap_resamples: 2000
+  bootstrap_seed: 20261027
+target:
+  minimum_paired_gain_percentage_points: 3.0
+  lower_confidence_gain_must_exceed: 0.0
+  minimum_positive_month_fraction: 0.6666666667
+  minimum_complete_cohort_coverage: 1.0
+research_integrity:
+  v1_halfyear_metrics_already_observed: true
+  v2_tuning_data: pretest-market.json_and_pretest-macro.json_only
+  halfyear_result_type: adaptive_retest_not_untouched_holdout
+  new_author_indicator_formulas_verified: false
+  actual_author_72_68_baseline_comparison_proven: false
+  historical_event_and_option_features: excluded_until_validated_dated_adapters

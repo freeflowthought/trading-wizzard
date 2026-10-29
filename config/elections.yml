@@ -1,0 +1,295 @@
+# Historical grouping facts only. No price outcomes or fitted market assumptions.
+version: us-midterms-1974-2022-v1
+verified_at: '2026-10-28T11:14:16+00:00'
+parties: {D: Democratic, R: Republican}
+definitions:
+  before: Party controlling each chamber immediately before the general election.
+  after: Party controlling the resulting new Congress, including caucusing independents.
+  chambers_flipped: Number of chambers whose controlling party changes, regardless of direction.
+  unified: The president's party controls both chambers; the judiciary is outside this definition.
+  result_effective_date: Start of the resulting Congress, not the result-call or certification time.
+  information_set: Final historical outcomes, not predictors known at the Election Day close.
+  results_known_at: Not reconstructed; a null value must not be replaced with Election Day.
+control_source_urls:
+  - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+  - https://www.senate.gov/history/partydiv.htm?lv=true
+  - https://history.house.gov/Institution/Party-Divisions/Party-Divisions/
+limitations:
+  - Election dates denote the nationwide general election; some races require later runoffs or resolution.
+  - This roster contains all 13 midterms from 1974 through 2022, before joining any stock returns.
+  - Chamber control and party identity alone do not establish a causal stock-return effect.
+  - Senate party-division tables sometimes include later membership changes; only control is encoded here.
+current_context:
+  as_of: '2026-10-28'
+  congress: 119
+  president: Donald Trump
+  president_party: R
+  house: R
+  senate: R
+  government: unified
+  source_urls:
+    - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+    - https://www.senate.gov/history/partydiv.htm?lv=true
+elections:
+  - year: 1974
+    election_date: '1974-11-05'
+    president: Gerald Ford
+    president_party: R
+    congress_before: 93
+    congress_after: 94
+    house_before: D
+    senate_before: D
+    house_after: D
+    senate_after: D
+    chambers_flipped: 0
+    government_before: divided
+    government_after: divided
+    result_effective_date: '1975-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://www.senate.gov/about/origins-foundations/electing-appointing-senators/contested-senate-elections/138Edmondson_Bellmon.htm
+    notes: >-
+      Ford had succeeded Nixon in August. The Clerk's 1974 statistics PDF cover
+      misprints November 4; the cited Senate election-case history explicitly
+      dates the election November 5. A later New Hampshire dispute affects
+      exact seat totals, not Democratic chamber control.
+  - year: 1978
+    election_date: '1978-11-07'
+    president: Jimmy Carter
+    president_party: D
+    congress_before: 95
+    congress_after: 96
+    house_before: D
+    senate_before: D
+    house_after: D
+    senate_after: D
+    chambers_flipped: 0
+    government_before: unified
+    government_after: unified
+    result_effective_date: '1979-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/1978election.pdf
+  - year: 1982
+    election_date: '1982-11-02'
+    president: Ronald Reagan
+    president_party: R
+    congress_before: 97
+    congress_after: 98
+    house_before: D
+    senate_before: R
+    house_after: D
+    senate_after: R
+    chambers_flipped: 0
+    government_before: divided
+    government_after: divided
+    result_effective_date: '1983-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/1982election.pdf
+  - year: 1986
+    election_date: '1986-11-04'
+    president: Ronald Reagan
+    president_party: R
+    congress_before: 99
+    congress_after: 100
+    house_before: D
+    senate_before: R
+    house_after: D
+    senate_after: D
+    chambers_flipped: 1
+    government_before: divided
+    government_after: divided
+    result_effective_date: '1987-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/1986election.pdf
+  - year: 1990
+    election_date: '1990-11-06'
+    president: George H. W. Bush
+    president_party: R
+    congress_before: 101
+    congress_after: 102
+    house_before: D
+    senate_before: D
+    house_after: D
+    senate_after: D
+    chambers_flipped: 0
+    government_before: divided
+    government_after: divided
+    result_effective_date: '1991-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/1990election.pdf
+  - year: 1994
+    election_date: '1994-11-08'
+    president: Bill Clinton
+    president_party: D
+    congress_before: 103
+    congress_after: 104
+    house_before: D
+    senate_before: D
+    house_after: R
+    senate_after: R
+    chambers_flipped: 2
+    government_before: unified
+    government_after: divided
+    result_effective_date: '1995-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/1994election.pdf
+    notes: Republican opposition took both chambers; a party-reversed analogue of 2006.
+  - year: 1998
+    election_date: '1998-11-03'
+    president: Bill Clinton
+    president_party: D
+    congress_before: 105
+    congress_after: 106
+    house_before: R
+    senate_before: R
+    house_after: R
+    senate_after: R
+    chambers_flipped: 0
+    government_before: divided
+    government_after: divided
+    result_effective_date: '1999-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/1998election.pdf
+  - year: 2002
+    election_date: '2002-11-05'
+    president: George W. Bush
+    president_party: R
+    congress_before: 107
+    congress_after: 108
+    house_before: R
+    senate_before: D
+    house_after: R
+    senate_after: R
+    chambers_flipped: 1
+    government_before: divided
+    government_after: unified
+    result_effective_date: '2003-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/2002election.pdf
+    notes: >-
+      Before means immediately before November 5, when Democrats controlled the
+      Senate following Jeffords's 2001 caucus change. The 107th Congress also had
+      earlier Republican control and a later November 2002 balance change;
+      neither substitutes for the pre-election information set.
+  - year: 2006
+    election_date: '2006-11-07'
+    president: George W. Bush
+    president_party: R
+    congress_before: 109
+    congress_after: 110
+    house_before: R
+    senate_before: R
+    house_after: D
+    senate_after: D
+    chambers_flipped: 2
+    government_before: unified
+    government_after: divided
+    result_effective_date: '2007-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/2006election.pdf
+    notes: >-
+      Democratic opposition took both chambers. The new Senate had 49 Democrats,
+      49 Republicans, and two independents caucusing with Democrats; control was D.
+  - year: 2010
+    election_date: '2010-11-02'
+    president: Barack Obama
+    president_party: D
+    congress_before: 111
+    congress_after: 112
+    house_before: D
+    senate_before: D
+    house_after: R
+    senate_after: D
+    chambers_flipped: 1
+    government_before: unified
+    government_after: divided
+    result_effective_date: '2011-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/2010election.pdf
+  - year: 2014
+    election_date: '2014-11-04'
+    president: Barack Obama
+    president_party: D
+    congress_before: 113
+    congress_after: 114
+    house_before: R
+    senate_before: D
+    house_after: R
+    senate_after: R
+    chambers_flipped: 1
+    government_before: divided
+    government_after: divided
+    result_effective_date: '2015-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/2014/114-statistics.pdf
+  - year: 2018
+    election_date: '2018-11-06'
+    president: Donald Trump
+    president_party: R
+    congress_before: 115
+    congress_after: 116
+    house_before: R
+    senate_before: R
+    house_after: D
+    senate_after: R
+    chambers_flipped: 1
+    government_before: unified
+    government_after: divided
+    result_effective_date: '2019-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/2018/statistics2018.pdf
+  - year: 2022
+    election_date: '2022-11-08'
+    president: Joe Biden
+    president_party: D
+    congress_before: 117
+    congress_after: 118
+    house_before: D
+    senate_before: D
+    house_after: R
+    senate_after: D
+    chambers_flipped: 1
+    government_before: unified
+    government_after: divided
+    result_effective_date: '2023-01-03'
+    results_known_at: null
+    source_urls:
+      - https://history.house.gov/Institution/Presidents-Coinciding/Party-Government/
+      - https://www.senate.gov/history/partydiv.htm?lv=true
+      - https://clerk.house.gov/member_info/electionInfo/2022/statistics2022.pdf
+    notes: Senate control includes Democratic-caucusing independents and, before the election, the vice president's tie-breaking vote.

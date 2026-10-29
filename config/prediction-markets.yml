@@ -1,0 +1,64 @@
+# Automatic event discovery is the live default. IDs below are legacy study references,
+# not a mandatory daily selection or a fixed required input to the live US outlook.
+# Official API: https://docs.polymarket.com/api-reference/markets/get-market-by-id
+timezone: America/Toronto
+main_case_threshold: 0.65  # Initial tunable value: 0.5 < threshold <= 1; not equity-up odds.
+discovery:
+  enabled: true
+  active_pages: 2
+  max_events: 6
+  max_days_to_end: 90
+  search_queries: [Fed decision, US inflation, US government, tariff, ceasefire, Bank of Japan, Bank of Korea, Nvidia earnings]
+markets:
+  - id: '2589812'
+    expected_question: Will there be no change in Fed interest rates after the October 2026 meeting?
+    label: 美联储10月维持利率
+    topic: rates
+    driver: fed_hold
+    yes_scenario: '维持利率是该合约的主流预期；仍看正式声明和10年债反应。'
+    no_scenario: '政策变化的定价升温；等待正式决议，不预先等同于利好或利空。'
+  - id: '5447182'
+    expected_question: US-Iran ceasefire continues through the midterms?
+    label: 美方未对伊新打击至中选
+    topic: geopolitics
+    driver: near_term_ceasefire
+    settlement_scope_note: '按合约规则关注美国对伊朗符合条件的空袭/导弹打击；不等于所有参与方全面停火或和平。'
+    yes_scenario: '市场偏向美国未发生符合该合约条件的新对伊打击；仍看油价和风险资产反应。'
+    no_scenario: '该合约范围内美方新打击的风险较高；检查油价与信用传导，不外推为所有战争状态。'
+  - id: '4713483'
+    expected_question: US x Iran ceasefire continues through November 30?
+    label: 美伊停火持续至11月底
+    topic: geopolitics
+    driver: extended_ceasefire
+    yes_scenario: '较长期缓和情景获得支持；不能直接外推科技股上涨概率。'
+    no_scenario: '较长期停火延续的定价偏低；与短期合约分开观察。'
+  - id: '562802'
+    expected_question: Will the Democratic Party control the House after the 2026 Midterm elections?
+    label: 民主党控制众议院
+    topic: election
+    driver: house_dem_control
+    yes_scenario: '关注该国会格局下的财政与监管预期；不直接判断指数涨跌。'
+    no_scenario: '关注其他国会格局；不把选举方向机械转换为股票方向。'
+  - id: '562793'
+    expected_question: Will the Democratic Party control the Senate after the 2026 Midterm elections?
+    label: 民主党控制参议院
+    topic: election
+    driver: senate_dem_control
+    yes_scenario: '把可能的参议院格局作为政策背景，交易仍由价位确认。'
+    no_scenario: '留意政策预期变化，等待选举结果与实际市场反应。'
+  - id: '3251602'
+    expected_question: No change in Bank of Japan’s interest rates after the October 2026 meeting?
+    label: 日本央行10月维持利率
+    topic: regional_rates
+    driver: boj_hold
+    settlement_scope_note: 'Yes仅指该合约定义的利率不变；No不是单独的加息合约，不能自动解释为加息。'
+    yes_scenario: '日本政策不变是该合约主预期；美股仍由美国利率主导，另看日元与半导体传导。'
+    no_scenario: '不变结果的定价偏低；变化方向须核验，不单独据此转空或调整美股价位。'
+  - id: '3940931'
+    expected_question: Will the Bank of Korea hike by 25 bps at the November 2026 meeting?
+    label: 韩国央行11月加息25bp
+    topic: regional_rates
+    driver: bok_hike_25
+    settlement_scope_note: 'Yes按该合约规则判为25bp加息，包含其舍入定义；No不自动等于维持或降息。'
+    yes_scenario: '先观察韩元及存储/半导体链压力，不能把韩国单一事件直接推广为美股整体转空。'
+    no_scenario: '该25bp加息结果未成主预期；其他政策结果须分别核验，不自动推断不变或降息。'

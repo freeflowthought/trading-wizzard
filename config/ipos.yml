@@ -1,0 +1,14 @@
+# Tracked recent IPOs for the IPO tracker (src/twiz/ipo.py).
+# His rules: day-one pops of 50-100% are sold into strength; the early
+# release (~15d) and the lockup expiry are supply-shock windows; the
+# long-term entry zone is the fall back toward the IPO price.
+ipos:
+  - ticker: SPCX
+    name: SpaceX
+    # Unverified research example. Confirm listing and prospectus terms first.
+    verified: false
+    source_url: ""
+    ipo_date: "2026-06-12"
+    ipo_price: 135
+    early_release_days: 15
+    lockup_days: 180

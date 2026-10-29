@@ -1,0 +1,34 @@
+protocol_version: monthly-sector-rotation-1
+previous_goal_turn: progress_rejected_frequent_single_ETF_timing
+user_scope: semiconductor_sector_rotation_plus_macro_portfolio_judgment
+universe: [QQQ, SPY, SMH]
+one_shared_account: true
+available_capital: 100
+maximum_order_target_exposure: 1.0
+exposure_is_optimized_not_a_universal_ten_percent_limit: true
+signal: initial_and_last_completed_US_session_of_each_month
+execution: next_actual_session_open_sell_before_buy
+features: [causal_price_momentum, causal_long_trend, relative_sector_strength]
+source_units: provider_split_normalized_no_duplicate_split_application
+benchmark:
+  primary: full_capital_QQQ_buy_and_hold
+  conservative_total_return_hurdle: provider_adjusted_QQQ_reinvestment
+  comparators: [full_capital_SMH_buy_and_hold, exposure_matched_static_QQQ_SMH_basket]
+  attribution: distinguish_sector_exposure_from_rotation_value
+  strategy_dividends_excluded: true
+selection:
+  maximum_candidates: 12
+  numerical_inputs_end_before: '2026-04-27'
+  positive_train_excess_over_QQQ_total_return_reference: true
+  positive_validation_excess_over_QQQ_total_return_reference: true
+  positive_excess_in_at_least_two_of_three_validation_blocks: true
+  drawdown_not_above_QQQ_buy_and_hold: true
+  ranking: validation_excess_then_lower_drawdown_then_fewer_changes
+  recent_period: adaptive_confirmation_not_untouched_holdout
+  no_passing_candidate: no_promotion_preserve_failure
+  sector_beta_gain_is_not_automatically_timing_skill: true
+confirmation:
+  cost_multipliers: [1.0, 2.0]
+  same_capital_dates_and_costs: true
+  pending_end_orders_not_forced: true
+  tests_and_accounting_audits_alone_are_not_success: true

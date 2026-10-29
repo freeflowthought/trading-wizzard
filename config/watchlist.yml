@@ -31,6 +31,10 @@ watchlist:
     name: Taiwan Semiconductor Manufacturing
     aliases: ["$TSM", "TSM", "TSMC", "Taiwan Semiconductor"]
     reddit_terms: ["TSM", "$TSM", "TSMC"]
+  - ticker: UMC
+    name: United Microelectronics Corporation
+    aliases: ["$UMC", "UMC", "United Microelectronics"]
+    reddit_terms: ["UMC", "$UMC", "United Microelectronics"]
   - ticker: MSFT
     name: Microsoft
     aliases: ["$MSFT", "MSFT", "Microsoft"]
@@ -39,7 +43,95 @@ watchlist:
     name: Apple
     aliases: ["$AAPL", "AAPL", "Apple"]
     reddit_terms: ["AAPL", "$AAPL", "Apple"]
+  - ticker: TSLA
+    name: Tesla
+    aliases: ["$TSLA", "TSLA", "Tesla"]
+    reddit_terms: ["TSLA", "$TSLA", "Tesla"]
+  - ticker: ORCL
+    name: Oracle
+    aliases: ["$ORCL", "ORCL", "Oracle"]
+    reddit_terms: ["ORCL", "$ORCL"]
+  - ticker: CRM
+    name: Salesforce
+    aliases: ["$CRM", "CRM", "Salesforce"]
+    reddit_terms: ["CRM", "$CRM"]
+  - ticker: NOW
+    name: ServiceNow
+    aliases: ["$NOW", "NOW", "ServiceNow"]
+    reddit_terms: ["NOW", "$NOW", "ServiceNow"]
+  - ticker: ADBE
+    name: Adobe
+    aliases: ["$ADBE", "ADBE", "Adobe"]
+    reddit_terms: ["ADBE", "$ADBE"]
+  - ticker: SNOW
+    name: Snowflake
+    aliases: ["$SNOW", "SNOW", "Snowflake"]
+    reddit_terms: ["SNOW", "$SNOW"]
+  - ticker: TTMI
+    name: TTM Technologies
+    aliases: ["$TTMI", "TTMI"]
+    reddit_terms: ["TTMI", "$TTMI"]
+  - ticker: COHR
+    name: Coherent
+    aliases: ["$COHR", "COHR", "Coherent"]
+    reddit_terms: ["COHR", "$COHR"]
+  - ticker: PFE
+    name: Pfizer
+    aliases: ["$PFE", "PFE", "Pfizer"]
+    reddit_terms: ["PFE", "$PFE"]
+  - ticker: IGV
+    name: iShares Expanded Tech-Software Sector ETF
+    aliases: ["$IGV", "IGV", "software ETF"]
+    reddit_terms: ["IGV", "$IGV"]
 
+  - ticker: MU
+    name: Micron Technology
+    aliases: ["$MU", "MU", "Micron"]
+    reddit_terms: ["MU", "$MU", "Micron"]
+  - ticker: SNDK
+    name: SanDisk
+    aliases: ["$SNDK", "SNDK", "SanDisk"]
+    reddit_terms: ["SNDK", "$SNDK"]
+  - ticker: QCOM
+    name: Qualcomm
+    aliases: ["$QCOM", "QCOM", "Qualcomm"]
+    reddit_terms: ["QCOM", "$QCOM"]
+  - ticker: CEG
+    name: Constellation Energy
+    aliases: ["$CEG", "CEG"]
+    reddit_terms: ["CEG", "$CEG"]
+  - ticker: VST
+    name: Vistra
+    aliases: ["$VST", "VST", "Vistra"]
+    reddit_terms: ["VST", "$VST"]
+  - ticker: RCL
+    name: Royal Caribbean
+    aliases: ["$RCL", "RCL"]
+    reddit_terms: ["RCL", "$RCL"]
+  - ticker: HOOD
+    name: Robinhood Markets
+    aliases: ["$HOOD", "HOOD", "Robinhood"]
+    reddit_terms: ["HOOD", "$HOOD"]
+  - ticker: PLTR
+    name: Palantir
+    aliases: ["$PLTR", "PLTR", "Palantir"]
+    reddit_terms: ["PLTR", "$PLTR"]
+  - ticker: SOXL
+    name: Direxion Daily Semiconductor Bull 3X
+    aliases: ["$SOXL", "SOXL"]
+    reddit_terms: ["SOXL", "$SOXL"]
+  - ticker: SOXQ
+    name: Invesco PHLX Semiconductor ETF
+    aliases: ["$SOXQ", "SOXQ"]
+    reddit_terms: ["SOXQ", "$SOXQ"]
+  - ticker: SPCX
+    name: SpaceX
+    aliases: ["$SPCX", "SPCX", "SpaceX"]
+    reddit_terms: ["SPCX", "$SPCX", "SpaceX"]
+  - ticker: INTC
+    name: Intel
+    aliases: ["$INTC", "INTC", "Intel"]
+    reddit_terms: ["INTC", "$INTC"]
 subreddits:
   - stocks
   - investing

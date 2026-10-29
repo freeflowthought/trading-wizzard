@@ -1,0 +1,25 @@
+# Objective revision after the user explicitly chose return priority on 2026-10-28.
+# Earlier strict studies and their no-selection results remain unchanged.
+protocol_version: sector-profit-priority-1
+objective: net_return_over_QQQ_buy_and_hold_first_drawdown_second
+maximum_exposure: 1.0
+universe: [QQQ, SPY, SMH]
+one_shared_account: true
+reuse_only_existing_twelve_pretest_profiles: true
+selection_inputs_end_before: '2026-04-27'
+eligibility:
+  positive_train_excess_over_QQQ_total_return: true
+  positive_validation_excess_over_QQQ_total_return: true
+  positive_validation_blocks_at_least: 2
+  historical_drawdown_ratio_to_QQQ_reference: 1.5
+  ratio_is_research_setting_not_user_approved_risk_limit: true
+  drawdown_ratio_sensitivity: [1.25, 1.5, 1.75]
+ranking: validation_excess_then_lower_drawdown_then_simplicity
+recent_confirmation:
+  start: '2026-04-27'
+  end: '2026-10-27'
+  only_pretest_selected_profile: true
+  cost_multipliers: [1.0, 2.0]
+  adaptive_research_not_untouched_holdout: true
+  compare_static_exposure_matched_basket_and_full_SMH: true
+  no_automatic_promotion_from_high_sector_beta: true
