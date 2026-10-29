@@ -1,5 +1,5 @@
 import os
-from datetime import datetime, timezone
+from itertools import zip_longest
 from typing import Dict, Iterable, List, Tuple
 from urllib.error import URLError
 from urllib.request import Request, urlopen
@@ -79,10 +79,12 @@ def fetch_rss_items(
     live: bool = False,
     limit: int = 50,
 ) -> Tuple[List[RawItem], List[str]]:
+    if limit <= 0:
+        return [], []
     if not live:
         return [], ["RSS live ingest skipped. Pass --live to fetch configured feeds."]
 
-    rows: List[RawItem] = []
+    batches: List[List[RawItem]] = []
     warnings: List[str] = []
     for feed in feeds:
         url = str(feed.get("url", ""))
@@ -99,23 +101,33 @@ def fetch_rss_items(
         except (URLError, TimeoutError, ElementTree.ParseError, ValueError) as exc:
             warnings.append(f"RSS ingest failed for {feed.get('name', url)}: {exc}")
             continue
-        for entry in entries:
+        batch: List[RawItem] = []
+        for entry in entries[:limit]:
             text = f"{entry.get('title', '')} {entry.get('text', '')}"
             tickers = extract_tickers(text, watchlist, ignore_terms)
-            rows.append(
+            batch.append(
                 RawItem(
                     source=str(feed.get("name", url)),
                     source_type=str(feed.get("source_type", "rss")),
                     url=str(entry.get("url", url)),
-                    published_at=str(
-                        entry.get("published_at") or datetime.now(timezone.utc).isoformat()
-                    ),
+                    published_at=str(entry.get("published_at") or ""),
                     ticker_candidates=tickers,
                     title=str(entry.get("title", "")),
                     text=str(entry.get("text", "")),
                     engagement={},
                 )
             )
+        batches.append(batch)
+    # Interleave sources so a busy first feed cannot consume the entire report.
+    rows = []
+    seen_urls = set()
+    for group in zip_longest(*batches):
+        for item in group:
+            if item is None or (item.url and item.url in seen_urls):
+                continue
+            if item.url:
+                seen_urls.add(item.url)
+            rows.append(item)
             if len(rows) >= limit:
                 return rows, warnings
     return rows, warnings

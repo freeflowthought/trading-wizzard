@@ -1,0 +1,33 @@
+protocol_version: benchmark-anchored-sector-rotation-2
+primary_objective: after_cost_excess_return_over_QQQ_buy_and_hold
+prior_run: sector-rotation-pretest-20261028T195636017570Z-4f774c94
+diagnosis: full_market_cash_switching_lost_the_benchmark_equity_premium
+universe: [QQQ, SPY, SMH]
+one_shared_account: true
+available_capital: 100
+mode: qqq_anchor
+core: retain_QQQ_baseline_regardless_of_absolute_trend
+satellite: SMH_only_when_eligible_and_relative_strength_confirms_otherwise_QQQ
+exposure_targets: optimized_up_to_100_percent
+signal: initial_and_last_completed_US_session_of_each_month
+execution: following_actual_session_open_common_post_cost_weights
+benchmark:
+  primary: full_capital_QQQ_buy_and_hold
+  conservative_reference: provider_adjusted_QQQ_total_return
+  attribution: [full_capital_SMH_hold, exposure_matched_static_QQQ_SMH_basket]
+  strategy_dividends_excluded: true
+selection:
+  maximum_candidates: 12
+  numerical_inputs_end_before: '2026-04-27'
+  positive_train_excess_over_QQQ_total_return: true
+  positive_validation_excess_over_QQQ_total_return: true
+  positive_excess_in_two_of_three_validation_blocks: true
+  drawdown_not_above_QQQ_buy_and_hold: true
+  ranking: validation_excess_then_lower_drawdown_then_fewer_changes
+  no_passing_candidate: no_promotion_preserve_failure
+  recent_period: adaptive_confirmation_not_untouched_holdout
+  sector_beta_gain_is_not_timing_accuracy: true
+confirmation:
+  cost_multipliers: [1.0, 2.0]
+  partial_and_full_positions_are_decisions_not_a_fixed_ten_percent_ceiling: true
+  tests_and_ledger_correctness_alone_do_not_establish_outperformance: true

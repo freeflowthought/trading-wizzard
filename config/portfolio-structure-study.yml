@@ -1,0 +1,42 @@
+protocol_version: structural-portfolio-swing-2
+previous_goal_turn: progress_funding_corrected_and_timing_failure_diagnosed
+primary_objective: after_cost_excess_return_over_QQQ_buy_and_hold
+primary_asset: QQQ
+secondary_asset: SPY
+maximum_exposure: 1.0
+separate_asset_books_are_not_summed: true
+prior_run: portfolio-pretest-20261028T190518827858Z-25b6f0a4
+diagnosis:
+  top: ordinary_red_candles_triggered_frequent_sell_then_higher_buyback
+  bottom: persistent_slow_average_veto_blocked_confirmed_recovery
+intervention:
+  top: profitable_wave_then_close_break_of_prior_short_term_lows
+  recovery: new_post_sale_base_and_price_breakout
+  failure: freeze_structural_stop_from_signal_and_apply_after_actual_fill
+  long_trend: risk_latch_allows_confirmed_recovery_below_slow_average
+  stages: cumulative_targets_up_to_100_percent
+execution:
+  signal: completed_session_close
+  fill: next_actual_session_open
+  maximum_exposure: 1.0
+  fee_bps_per_side: 1.0
+  slippage_bps_per_side: 2.0
+  no_borrowing_or_guaranteed_stop_fill: true
+selection:
+  maximum_candidates: 12
+  numerical_inputs_end_before: '2026-04-27'
+  positive_QQQ_train_excess_over_total_return_reference: true
+  positive_QQQ_aggregate_validation_excess_over_total_return_reference: true
+  positive_excess_in_at_least_two_of_three_validation_blocks: true
+  drawdown_not_above_buy_and_hold: true
+  ranking: validation_excess_then_lower_drawdown_then_fewer_changes
+  recent_period: adaptive_confirmation_not_untouched_holdout
+  no_passing_candidate: no_promotion_and_preserve_failed_results
+benchmark:
+  matched_price_returns: same_capital_dates_and_costs
+  additional_conservative_hurdle: provider_adjusted_reinvested_total_return
+  strategy_cash_dividends_excluded: true
+  comparison_to_total_return_is_not_like_for_like_strategy_total_return: true
+confirmation:
+  cost_multipliers: [1.0, 2.0]
+  goal_requires_material_profit_improvement_not_unit_test_success: true

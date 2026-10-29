@@ -20,6 +20,14 @@ fred_series:
     name: Unemployment Rate
   - id: BAMLH0A0HYM2
     name: ICE BofA High Yield OAS
+  - id: SOFR
+    name: Secured Overnight Financing Rate
+  - id: WTREGEN
+    name: Treasury General Account
+
+# US-listed sector references and exact indices for source-study reconstruction.
+# These are supporting data, not additional funded watchlist positions.
+market_context_tickers: [DIA, XLF, XLU, XLV, XLE, XLP, ITA, TLT, GLD, TQQQ, '^GSPC', '^SOX']
 
 news_keywords:
   - FOMC

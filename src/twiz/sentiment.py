@@ -1,5 +1,6 @@
 import math
 from datetime import datetime, timezone
+from email.utils import parsedate_to_datetime
 from typing import Dict, Iterable, List, Optional, Tuple
 
 from .config import WatchedAsset
@@ -43,13 +44,16 @@ NEGATIVE_TERMS = {
 }
 
 
-def parse_datetime(value: str, now: Optional[datetime] = None) -> datetime:
+def parse_datetime(value: str, now: Optional[datetime] = None) -> Optional[datetime]:
     if not value:
-        return now or datetime.now(timezone.utc)
+        return None
     try:
         parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except ValueError:
-        return now or datetime.now(timezone.utc)
+        try:
+            parsed = parsedate_to_datetime(value)
+        except (TypeError, ValueError, OverflowError):
+            return None
     if parsed.tzinfo is None:
         parsed = parsed.replace(tzinfo=timezone.utc)
     return parsed
@@ -85,6 +89,8 @@ class FinBertScorer:
     def _load(self) -> bool:
         if self._pipeline is not None:
             return True
+        if self._error is not None:
+            return False
         try:
             from transformers import pipeline
 
@@ -121,6 +127,8 @@ def engagement_weight(
 ) -> float:
     now = now or datetime.now(timezone.utc)
     published = parse_datetime(published_at, now=now)
+    if published is None:
+        return 0.1
     age_hours = max((now - published).total_seconds() / 3600, 0.0)
     raw_engagement = (
         float(engagement.get("score", 0))
@@ -139,11 +147,21 @@ def analyze_sentiment_items(
     ignore_terms: Iterable[str],
     prefer_finbert: bool = True,
     now: Optional[datetime] = None,
+    max_age_days: float = 7.0,
 ) -> List[SentimentSignal]:
+    now = now or datetime.now(timezone.utc)
     scorer = FinBertScorer() if prefer_finbert else FinancialLexiconScorer()
     fallback = FinancialLexiconScorer()
     signals: List[SentimentSignal] = []
+    seen_urls = set()
     for item in items:
+        published = parse_datetime(item.published_at)
+        if published is None or not 0 <= (now - published).total_seconds() <= max_age_days * 86400:
+            continue
+        if item.url and item.url in seen_urls:
+            continue
+        if item.url:
+            seen_urls.add(item.url)
         text = item_summary_text(item.title, item.text)
         tickers = item.ticker_candidates or extract_tickers(text, watchlist, ignore_terms)
         if not tickers:

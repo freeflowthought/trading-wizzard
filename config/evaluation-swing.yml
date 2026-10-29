@@ -1,0 +1,125 @@
+# Author-zone and dynamic-zone swing research. This replaces neither earlier
+# diagnostic archives nor the production policy until a dated comparison passes.
+protocol_version: author-swing-v1
+evaluation_start: '2026-04-27'
+evaluation_end: '2026-10-27'
+annotation_file: data/processed/evaluation/annotation/semantic-freeze.json
+target_task: bottom_top_levels_and_profitable_long_swings
+
+fixed_constraints:
+  max_new_capital_pct: 10.0
+  max_campaign_loss_pct: 0.5
+  max_concurrent_campaigns: 1
+  fee_bps_per_side: 1.0
+  slippage_bps_per_side: 2.0
+  execution: daily_close_decision_next_session_open_fill
+  funding_order: ready_time_then_source_time_then_asset_then_candidate_id
+  pending_watch_reserves_capital: false
+  cancel_remaining_entries_after_first_trim: true
+  cost_stress_multipliers: [1.0, 2.0, 3.0]
+
+# The optimizer changes signal/trade parameters, not what counts as a forecast hit.
+scoring:
+  literal_forecast_deadline: author_explicit_deadline_only
+  bottom_top_point_tolerance_atr: 0.5
+  tolerance_sensitivity_atr: [0.25, 0.5, 1.0]
+  zone_loss_formula: '(upper-lower + 10*max(lower-realized_extremum, 0, realized_extremum-upper))/origin_atr14'
+  zone_width_penalty: fixed_coefficient_one_in_zone_loss_not_optimized
+  zone_miss_penalty: 10.0
+  descriptive_zone_hit_alone_can_promote_model: false
+  no_explicit_deadline: unscorable_literal_forecast
+  support_is_not_window_bottom: true
+  resistance_is_not_window_top: true
+  target_touch_is_not_window_top: true
+  conditional_projection_requires_original_trigger: true
+  unfilled_and_expired: retain_in_opportunity_denominator
+  blocked_and_pending: retain_with_reason
+  reports: [literal_point_error, opportunity_success, filled_trade_win_rate,
+            net_account_return, max_drawdown, entry_coverage, mae, mfe]
+  original_author_profit_claims_are_fills: false
+  unknown_author_exits: standardized_execution_proxy_separate_from_literal_accuracy
+  proxy_default_holding_sessions: 20
+
+selection:
+  method: chronological_mature_outcomes_only
+  pretest_cutoff: '2026-04-27'
+  refit_every_sessions: 21
+  embargo_sessions: 5
+  validation_blocks: 3
+  minimum_closed_campaigns: 20
+  minimum_event_groups_for_learned_bridge: 20
+  maximum_candidates: 96
+  seed: 20261028
+  candidate_list_must_be_frozen_before_outcome_join: true
+  constraints: [win_rate_not_below_common_execution_baseline,
+                max_drawdown_not_worse_than_common_execution_baseline]
+  ranking: net_account_return_then_opportunity_success_then_fewer_parameters_then_stable_id
+  insufficient_samples: keep_default_and_report_insufficient_evidence
+  no_passing_candidate: keep_default_and_report_target_not_met
+  promotion: require_future_or_separately_held_out_confirmation
+
+defaults:
+  event_variant: learned_event_bridge
+  event_threshold: 0.65
+  trade_probability_threshold: 0.65
+  main_case_only: false
+  zone_width_atr: 0.5
+  confirm_sessions: 2
+  stop_atr: 1.0
+  take_profit_r: 2.0
+  holding_sessions: 20
+  lookback_sessions: 126
+  entry_fractions: [0.40, 0.35, 0.25]
+  trim_fractions: [0.40, 0.30, 0.30]
+
+search_space:
+  event_threshold: [0.55, 0.65, 0.75, 0.85]
+  trade_probability_threshold: [0.55, 0.65, 0.75]
+  main_case_only: [false, true]
+  zone_width_atr: [0.25, 0.5, 1.0]
+  confirm_sessions: [1, 2, 3]
+  stop_atr: [0.75, 1.0, 1.5]
+  take_profit_r: [1.5, 2.0, 3.0]
+  holding_sessions: [10, 20, 40]
+  lookback_sessions: [63, 126, 252]
+  entry_fractions: [[0.40, 0.35, 0.25], [0.25, 0.35, 0.40], [0.50, 0.30, 0.20]]
+  trim_fractions: [[0.40, 0.30, 0.30], [0.50, 0.30, 0.20], [0.30, 0.30, 0.40]]
+
+structure_search_space:
+  range_sessions: [42, 63, 126]
+  pivot_left: [2, 3, 5]
+  pivot_right: [2, 3, 5]
+  confirmation_sessions: [3, 5, 10]
+  atr_period: [10, 14, 20]
+  cluster_atr: [0.75, 1.0, 1.5]
+  zone_buffer_atr: [0.15, 0.25, 0.5]
+  old_base_sessions: [63, 126, 252]
+
+event_direction:
+  variants: [price_only, signed_weighted_event_score, learned_event_bridge]
+  input_features: [event_probability_level, probability_revision, conditional_yes_effect,
+                   conditional_no_effect, impact_horizon, channel_coverage,
+                   us_yield_and_credit_transmission, semiconductor_relative_strength]
+  correlated_contracts: one_representative_per_explicit_risk_group
+  multiple_groups_in_one_channel: share_channel_budget
+  equity_probability_definition: close_20_sessions_ahead_above_origin_completed_close
+  directional_auxiliary_target: close_20_sessions_ahead_above_origin_completed_close
+  directional_auxiliary_target_is_not_swing_acceptance_metric: true
+  trade_profit_probability: separate_target_with_explicit_entry_exit_and_costs
+  calibration: time_ordered_out_of_fold_only
+  evaluation: [brier_score, log_loss, reliability, net_return, swing_win_rate]
+  no_calibration_evidence: impact_score_only_no_equity_probability
+  missing_historical_channels: separate_coverage_ablation_no_current_backfill
+  channel_weight_search: nonnegative_regularized_weights_selected_before_test
+  conditional_effects: learned_with_market_state_or_explicit_dated_research_mapping
+
+research_integrity:
+  earlier_halfyear_daily_direction_results_already_seen: true
+  current_halfyear_is_untouched_holdout: false
+  actual_original_five_year_72_68_method_reconstructed: false
+  source_archive_covers_complete_halfyear: false
+  latest_revised_macro_is_not_vintage_macro: true
+  new_options_features_require_archived_chains: true
+  nominal_author_levels_require_split_basis_ledger: true
+  data_quality_thresholds_are_not_tuned_to_delete_losses: true
+  no_performance_gain_claim_until_paired_swing_results_exist: true

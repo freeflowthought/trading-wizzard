@@ -1,0 +1,60 @@
+# Point-formation research, separate from trades and literal author accuracy.
+protocol_version: conditional-swing-range-pretest-v1
+windows_file: config/swing-study-windows.yml
+source_price_cutoff_exclusive: '2026-04-27'
+partitions: [train, validation]
+primary_horizon_sessions: 20
+secondary_horizon_sessions: [60]
+forecast_quantiles: [0.1, 0.5, 0.9]
+embargo_sessions: 5
+point_hit_tolerance_atr: 0.5
+scoring:
+  origin_bar_excluded: true
+  bottom_label: minimum_future_daily_low
+  top_label: maximum_future_daily_high
+  point_normalization: atr14_known_at_origin
+  matched_point_comparison_only: true
+  full_cohort_coverage_and_missing_reported: true
+  missing_forecast_is_a_hit: false
+  baseline_bottom: credible_structure_support_center_as_naive_proxy
+  baseline_top: nearest_known_recovery_above_origin_close_plus_half_atr
+  baseline_is_authenticated_author_prediction: false
+  trade_profit_inferred_from_point_hit: false
+models:
+  - id: default
+    neighbors: 80
+    training_sessions: 1260
+    group_weights: {trend: 1, stress: 1, volatility: 1, seasonality: 1}
+  - id: no_seasonality
+    neighbors: 80
+    training_sessions: 1260
+    group_weights: {trend: 1, stress: 1, volatility: 1, seasonality: 0}
+  - id: no_volatility
+    neighbors: 80
+    training_sessions: 1260
+    group_weights: {trend: 1, stress: 1, volatility: 0, seasonality: 1}
+  - id: no_stress
+    neighbors: 80
+    training_sessions: 1260
+    group_weights: {trend: 1, stress: 0, volatility: 1, seasonality: 1}
+  - id: no_trend
+    neighbors: 80
+    training_sessions: 1260
+    group_weights: {trend: 0, stress: 1, volatility: 1, seasonality: 1}
+  - id: neighbors40
+    neighbors: 40
+    training_sessions: 1260
+    group_weights: {trend: 1, stress: 1, volatility: 1, seasonality: 1}
+  - id: neighbors160
+    neighbors: 160
+    training_sessions: 1260
+    group_weights: {trend: 1, stress: 1, volatility: 1, seasonality: 1}
+  - id: shorter_history
+    neighbors: 80
+    training_sessions: 504
+    group_weights: {trend: 1, stress: 1, volatility: 1, seasonality: 1}
+acceptance:
+  goal_completion_proven_by_this_study_alone: false
+  actual_author_accuracy_reconstructed: false
+  stock_probability_calibrated_by_neighbor_frequency: false
+  strategy_return_validation_required: true

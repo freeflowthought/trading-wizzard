@@ -4,7 +4,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
-from twiz.technical import cluster_support_resistance, latest_indicators, rolling_mean
+from twiz.technical import cluster_support_resistance, latest_indicators, rolling_mean, rsi
 
 
 def make_rows(values):
@@ -24,6 +24,11 @@ def make_rows(values):
 
 
 class TechnicalTests(unittest.TestCase):
+    def test_flat_prices_have_neutral_rsi(self) -> None:
+        self.assertEqual(rsi([100.0] * 60)[-1], 50.0)
+        self.assertEqual(rsi(list(range(1, 61)))[-1], 100.0)
+        self.assertEqual(rsi(list(range(60, 0, -1)))[-1], 0.0)
+
     def test_rolling_mean_respects_lookback(self) -> None:
         output = rolling_mean([1, 2, 3, 4], 3)
         self.assertEqual(output[:2], [None, None])

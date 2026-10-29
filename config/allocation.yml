@@ -1,0 +1,31 @@
+# Current user policy: up to 100% unlevered; this is an allowed maximum, not a buy recommendation.
+# Percentage points of total account value; one shared campaign, not a ceiling per ticker.
+primary_ticker: QQQ
+max_new_capital_pct: 100
+entry_fractions: [0.40, 0.35, 0.25]
+trim_fractions: [0.40, 0.30, 0.30]
+unknown_macro_initial_cap_pct: 2
+# No additional model-risk veto below the unlevered account ceiling; the stop is still reported.
+max_campaign_loss_pct: 100
+min_entry_spacing_pct: 0.75
+# Initial engineering values, eligible for chronological research optimization.
+# A research winner is not automatically promoted to the report.
+stop_buffer_atr: 0.25
+entry_offsets_atr: [1.0, 0.5, 0.0]
+target_r_multiples: [1.0, 2.0, 3.0]
+target_buffer_atr: 0.5
+target_spacing_atr: 0.5
+max_chase_atr: 0.5
+# Explicit provisional allowance for the existing unvalidated branch, not a global capital cap.
+provisional_cap_pct: 2.0
+# Fractions of max_new_capital_pct, not universal account percentages or buy recommendations.
+# These legacy scenario heuristics remain unvalidated and do not override price confirmation.
+scenario_budget_fractions:
+  defensive: {initial: 0.10, post_event: 0.35}
+  stress: {initial: 0.0, post_event: 0.20}
+  repair_strong: {initial: 0.20, post_event: 0.50}
+  repair_weak: {initial: 0.10, post_event: 0.35}
+  unknown: {initial: 0.0, post_event: 0.20}
+  event_support_with_rates: {initial: 0.20, post_event: 0.35}
+  regional: {initial: 0.10, post_event: 0.20}
+  before_event: 0.20

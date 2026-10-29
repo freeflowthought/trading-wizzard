@@ -50,6 +50,12 @@ def fetch_fred_observations(
                 "name": item.get("name", series_id),
                 "date": value.get("date"),
                 "value": value.get("value"),
+                # Oldest -> newest, so the macro gate can measure drift
+                # (e.g. how fast the 10Y is approaching the 5% danger line).
+                "history": [
+                    {"date": obs.get("date"), "value": obs.get("value")}
+                    for obs in reversed(observations)
+                ],
                 "fetched_at": datetime.now(timezone.utc).isoformat(),
             }
         )

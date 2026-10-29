@@ -1,0 +1,40 @@
+# The user explicitly replaced the earlier 10%-new-dip constraint with up to100%.
+protocol_version: full-capital-portfolio-swing-1
+previous_goal_turn: progress_with_weak_benchmark_subsequently_rejected
+primary_objective: after_cost_excess_return_over_buy_and_hold
+primary_asset: QQQ
+secondary_asset: SPY
+separate_asset_books_are_not_summed: true
+maximum_exposure: 1.0
+maximum_exposure_is_parameter_not_universal_ten_percent: true
+unlevered_cash_and_holdings_nonnegative: true
+initial_position: same_next_session_open_as_buy_and_hold
+trading:
+  staged_reentry: confirmed_bottom_or_confirmed_price_recovery
+  top: allow_partial_profit_and_retained_position
+  failure: allow_complete_exit
+  decision: completed_session_close
+  fill: next_actual_session_open
+  fee_bps_per_side: 1.0
+  slippage_bps_per_side: 2.0
+benchmark:
+  same_start_end_capital_and_paid_execution_costs: true
+  main_reference: QQQ_buy_and_hold_with_provider_adjusted_total_return
+  also_report: raw_price_buy_and_hold
+  strategy_dividends: excluded_conservatively
+  no_total_return_substitution_when_adjusted_data_missing: true
+selection:
+  maximum_candidates: 12
+  numerical_inputs_end_before: '2026-04-27'
+  require_positive_train_alpha_to_total_return: true
+  require_positive_aggregate_validation_alpha_to_total_return: true
+  positive_validation_alpha_in_at_least_two_of_three_blocks: true
+  drawdown_not_above_buy_and_hold: true
+  ranking: validation_total_return_alpha_then_lower_drawdown_then_fewer_changes
+  recent_halfyear: adaptive_confirmation_not_untouched_holdout
+  no_passing_candidate: no_promotion_report_failure_to_beat_holding
+confirmation:
+  compare_original_cashbook_only_as_diagnostic: true
+  require_recent_excess_return_over_total_return_benchmark: true
+  cost_multipliers: [1.0, 2.0]
+  unit_tests_and_audit_alone_are_not_success: true

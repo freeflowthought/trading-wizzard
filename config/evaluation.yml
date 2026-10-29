@@ -1,0 +1,51 @@
+# Frozen before the first accuracy evaluation. Never choose settings on test labels.
+protocol_version: halfyear-direction-v1
+evaluation_start: '2026-04-27'
+evaluation_end: '2026-10-27'
+primary_horizon_sessions: 5
+secondary_horizons_sessions: [1, 20]
+prediction_time: after_completed_US_regular_session
+label: close_to_close_direction
+flat_return_label: up
+primary_tickers: [QQQ, SPY]
+individual_tickers: [NVDA, AMD, AVGO, TSM, UMC, MSFT, AAPL, TSLA, ORCL, CRM, NOW, ADBE, SNOW, TTMI, COHR, PFE, MU, SNDK, QCOM, CEG, VST, RCL, HOOD, PLTR, INTC]
+excluded:
+  SPCX: unverified_issuer_configuration
+  SOXL: leveraged_ETF_not_individual_stock
+universe_note: Fixed user watchlist cohort, not a survivorship-free all-stock universe.
+training:
+  window_sessions: 1260
+  refit_every_sessions: 5
+  embargo_sessions: 5
+  pretest_validation_sessions: 63
+  penalties: [0.1, 1.0, 10.0]
+  stock_direction_thresholds: [0.45, 0.50, 0.55, 0.60]
+  selection_data: strictly_before_evaluation_start_with_mature_labels_and_embargo
+  tuning_on_evaluation_labels: forbidden
+scoring:
+  cohort: all_scheduled_mature_origins_not_only_trade_signals
+  missing_prediction: miss
+  missing_outcome: blocks_coverage_gate
+  baselines: [frozen_shunge_rule_proxy, always_up]
+  paired_date_blocks_sessions: 5
+  bootstrap_resamples: 2000
+  bootstrap_seed: 20261027
+target:
+  minimum_paired_gain_percentage_points: 3.0
+  aspirational_gain_percentage_points: 10.0
+  confidence_level: 0.95
+  lower_confidence_gain_must_exceed: 0.0
+  minimum_positive_month_fraction: 0.6666666667
+  minimum_complete_cohort_coverage: 1.0
+  reference_index_accuracy: 0.72
+  reference_individual_accuracy: 0.68
+  reference_status: user_reported_not_independently_verified_or_same_protocol
+  reference_comparison_is_proof_of_improvement: false
+evidence:
+  price_history: downloaded_historical_version_with_provider_and_hash
+  macro_history: revised_history_unless_actual_vintage_or_publication_verified
+  historical_option_chain: unavailable_unless_dated_verified_archive_exists
+  historical_prediction_market: only_created_contracts_with_conservative_available_at
+  missing_event_probability: unknown_not_50_percent
+  contract_rules: never_assume_current_rules_are_archived_historical_rules
+  event_main_case_threshold_default: 0.65

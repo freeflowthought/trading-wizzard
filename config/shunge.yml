@@ -1,0 +1,56 @@
+# Curated observations from the user's supplied timeline; not fitted probabilities.
+patterns:
+  - name: 分开判断中期方向与短期路径
+    interpretation: 中期看涨并不排除先反弹、再破底；短线仓与长期仓要分开，不能把长期目标当作今天的买入信号。
+    evidence:
+      - {date: '2026-06-16', source: 'data/raw/timelines/june-2026.txt', line: 1, message_time: '9:07 AM', summary: '7540–7560突破看7700；突破不了则未来一个月观察7200。'}
+      - {date: '2026-08-26', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 14, summary: '先反弹几天、九月继续下滑，然后再看中选前8000（SPX）。'}
+      - {date: '2026-10-18', source: 'data/raw/timelines/october-2026.txt', line: 5, summary: '反弹仓不能长持；中期仍看7900–8000（SPX），重仓者反弹留现金。'}
+  - name: 关键线决定是否切换到极限情景
+    interpretation: 先辨认反复争夺的结构边界；守住才试反弹，失守则暂停原计划，并观察中间支撑与更深区域。
+    evidence:
+      - {date: '2026-08-30', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 29, summary: 'QQQ 705支撑、725压力；SPX 7200失守才讨论7000以下。'}
+      - {date: '2026-10-21', source: 'data/raw/timelines/october-2026.txt', line: 85, summary: 'QQQ 704–705是关键防线；跌破才打开650情景。'}
+  - name: 价格与时间共同确认
+    interpretation: 不是碰到一个数字就成立；需要守住、收复或站稳，还要观察能否跨过财报、解禁、期权到期等时间窗口。
+    evidence:
+      - {date: '2026-10-21', source: 'data/raw/timelines/october-2026.txt', line: 89, summary: '两条修复路径：收复725并走向740；或704附近守到10月30日。'}
+  - name: 宏观事件先验证传导链
+    interpretation: 把战争、政策等主张转成有期限的事件假设，再看油价、国债收益率及股价是否响应；事件概率不能直接当作股市上涨概率。
+    evidence:
+      - {date: '2026-06-15', source: 'data/raw/timelines/june-2026.txt', line: 1, message_time: '8:59 AM', summary: '作者称停战消息引发逼空，但细节含糊，建议反弹兑现并等待美联储；该事件陈述未独立核实。'}
+      - {date: '2026-09-02', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 40, summary: '以10年美债收益率接近5或回落4.5作为作者的风险情景开关。'}
+      - {date: '2026-10-19', source: 'data/raw/timelines/october-2026.txt', line: 9, summary: '停战消息尚未证实；预期停战影响油价及风险偏好，同时保留现金。'}
+  - name: 看板块广度与轮动
+    interpretation: 龙头上涨不等于板块转强；比较半导体、软件与大盘是否同步，优先用板块表达判断，再选择个股。
+    evidence:
+      - {date: '2026-08-26', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 12, summary: '提出软件股进入修复阶段，和半导体财报交易分开。'}
+      - {date: '2026-08-27', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 18, summary: 'NVDA上涨但多只硬件、科技股下跌，提示上涨广度不足。'}
+  - name: 事件波幅与方向分开
+    interpretation: 财报前估计波幅，财报后再看预期是否已被消化；好业绩本身不保证上涨。6–7%的来源尚不能确认。
+    evidence:
+      - {date: '2026-08-25', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 7, summary: 'NVDA财报前预计约6–7%波幅，但等待业绩后再交易。'}
+      - {date: '2026-10-21', source: 'data/raw/timelines/october-2026.txt', line: 79, summary: 'TSLA即使业绩好，也需更高指引才能改变短线预期。'}
+  - name: 仓位随情景改变
+    interpretation: 轻仓防踏空、反弹分批兑现、破位停止加仓；同时核算卖出看跌期权可能接股的资金需求。核心仓和交易仓分开。
+    evidence:
+      - {date: '2026-08-25', source: 'data/raw/timelines/august-september-2026-excerpts.txt', line: 5, summary: '第一批后等待财报及解禁，再考虑更低位置第二批。'}
+      - {date: '2026-10-19', source: 'data/raw/timelines/october-2026.txt', line: 21, summary: '因后续sell put可能接股，先减持已有反弹仓管理资金。'}
+      - {date: '2026-10-21', source: 'data/raw/timelines/october-2026.txt', line: 89, summary: '704附近才尝试抄底，跌破就不能再动。'}
+case:
+  ticker: QQQ
+  as_of: '2026-10-21'
+  source: data/raw/timelines/october-2026.txt
+  source_line: 85
+  source_support: [704, 705]
+  source_target: 650
+  confirmation: 725
+  reversal: 740
+  review_after: '2026-10-30'
+  prior_zone: [645, 655]
+  prior_zone_month: '2026-04'
+  high_lookback_sessions: 63
+  method_source_url: https://media.fidelity.com/assets/Fidelity.com_VMS/996/523/chart-patterns-slides-final.pdf
+  # This review limit and daily-close trigger are OUR implementation choices.
+  # The author said '跌破', without one uniform intraday/daily confirmation rule.
+  operational_rule: 日收盘低于704暂停原抄底方案；收复后重新评估，不连续向下补仓。
